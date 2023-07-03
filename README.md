@@ -1,0 +1,2 @@
+- 构建指令：docker build --tag web-demo:v0.5 . 
+- 运行指令：docker run -p 9090:9090 -itd tag 
