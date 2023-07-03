@@ -6,8 +6,17 @@ import (
     "net/http"
     "strings"
     "log"
+    "io/ioutil"
 )
 
+
+func readFile() (string){
+    f, err := ioutil.ReadFile("output")
+    if err != nil {
+        return "read fail"
+    }
+    return string(f)
+}
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
     r.ParseForm()  // 解析参数，默认是不会解析的
@@ -19,7 +28,7 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
         fmt.Println("key:", k)
         fmt.Println("val:", strings.Join(v, ""))
     }
-    fmt.Fprintf(w, "Hello World!") // 这个写入到 w 的是输出到客户端的
+    fmt.Fprintf(w, readFile()) // 这个写入到 w 的是输出到客户端的
 }
 
 func main() {
